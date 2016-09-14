@@ -15,6 +15,4 @@ int removeNo(No **inicioLista,int valor);
 
 void imprimeLista(No *inicioLista);
 
-void imprimeListaR(No *inicioLista);
-
 void destroiLista(No **inicioLista);

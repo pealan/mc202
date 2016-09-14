@@ -3,3 +3,4 @@ all:
 
 run:
 	./lab02
+

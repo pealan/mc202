@@ -17,10 +17,11 @@ int main(void){
 		addLista(&listaMTF,v,1);
 	}
 
-	listaTR = copiaLista(listaMTF);//Copia lista
+	listaTR = copiaLista(listaMTF);
 
 	char op;
 	int custoMTF = 0, custoTR = 0;
+	//Le operacoes
 	for (i = 0; i<r; i++){
 		scanf(" %c %d",&op,&v);
 		switch(op){
@@ -45,6 +46,7 @@ int main(void){
 	printf("%d\n",custoTR);
 	imprimeLista(listaTR);
 
+	//Desaloca memoria
 	destroiLista(&listaMTF);
 	destroiLista(&listaTR);
 }

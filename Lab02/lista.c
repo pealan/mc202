@@ -5,12 +5,13 @@
 int addLista(No **inicioLista, int valor, int tipo){
 	No *novo;
 	novo = malloc(sizeof(No));
+	int c = 1;
 
-	//TODO checar se consegui alocar
+	if(novo == NULL){
+		exit(0);
+	}
 
-	novo->valor = valor;
-	
-	int c = 1;	
+	novo->valor = valor;	
 
 	if(*inicioLista == NULL){
 		novo->antes = NULL;
@@ -59,7 +60,9 @@ No *copiaLista(No *original){
 	while(atual != NULL){
 		novo = malloc(sizeof(No));
 
-		//TODO checa memoria
+		if(novo == NULL){
+			exit(0);
+		}
 
 		novo->valor = atual->valor;
 		novo->prox = NULL;
@@ -73,9 +76,7 @@ No *copiaLista(No *original){
 		}
 
 		ant = novo;//Guarda ultimo elemento salvo
-		
-		atual = atual->prox;
-		
+		atual = atual->prox;		
 	}
 
 	return copia;	
@@ -90,7 +91,10 @@ int acessaNo(No **inicioLista, int valor, int tipo){
 		c++;
 	}
 
-	//TODO checar se achou o valor
+	if(atual == NULL){
+		//Mensagem?
+		return c;//Custo de nao achar o valor eh percorrer toda a lista
+	}
 	
 	int aux;
 	if(atual->antes != NULL){//Nao eh o primeiro elemento da lista
@@ -104,16 +108,13 @@ int acessaNo(No **inicioLista, int valor, int tipo){
 			atual->prox = (*inicioLista);
 			atual->antes = NULL;
 			(*inicioLista) = atual;
-			//printf("CUSTO MTF: %d\n",c);
 		}else if(tipo == 2){//TR
 			aux = atual->valor;
 			atual->valor = atual->antes->valor;
 			atual->antes->valor = aux;
-			//printf("CUSTO TR: %d\n",c);
 		}
 	}
-		
-	
+			
 	return c;
 }
 
@@ -126,7 +127,10 @@ int removeNo(No **inicioLista,int valor){
 		c++;
 	}
 
-	//TODO checar se achou o valor
+	if(atual == NULL){
+		//Mensagem?
+		return c;
+	}
 
 	if(atual->antes !=NULL && atual->prox != NULL){//Esta no meio da lista
 		atual->antes->prox = atual->prox;
@@ -143,7 +147,6 @@ int removeNo(No **inicioLista,int valor){
 	free(atual);
 
 	return c;
-
 }
 
 void imprimeLista(No *inicioLista){
@@ -157,21 +160,6 @@ void imprimeLista(No *inicioLista){
 	printf("\n");
 }
 
-void imprimeListaR(No *inicioLista){
-	//Imprime uma lista encadeada simples
-	No *atual = inicioLista;
-	while(atual->prox != NULL){
-		atual = atual->prox;
-	}
-
-	while(atual!= NULL){
-		printf("%d ",atual->valor);
-		atual = atual->antes;
-	}
-
-	printf("\n");
-}
-
 void destroiLista(No **inicioLista){
 	No *atual = *inicioLista, *aux;
 	while(atual!=NULL){
@@ -180,3 +168,4 @@ void destroiLista(No **inicioLista){
 		free(aux);
 	}
 }
+
